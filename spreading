@@ -1,1 +1,24 @@
+import os
+
+#create variable to start program
+cmd = 'start payload.txt'
+
+#define function with variable
+os.system(cmd)
+
+#copy to 'clone' directory on C: of my computer
+os.mkdir('C:\clone')
+os.system(r"copy payload.txt 'C:\clone')
+os.system(r"copy" + name + 'C:\clone')
+          
+#copy to new 'clone' directory on another computer on my network
+os.mkdir('<filepath>\clone')
+os.system(r"copy payload.txt '<filepath>\clone')
+os.system(r"copy" + name + '<filepath>\clone')
+
+
+Next steps:
+1. Create image of another Windows machine on same network as fullstack-windows-10 machine
+2. With filepath of new computer, paste in to script above 
+
 
