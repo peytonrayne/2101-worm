@@ -29,3 +29,7 @@ print("IP" + " "*18+"MAC")
 
 for client in clients:
     print("{:16}    {}".format(client['ip'], client['mac']))
+for client in clients:
+    target - client['ip']
+    
+    print(target)
