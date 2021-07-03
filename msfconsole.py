@@ -3,7 +3,9 @@ import subprocess
 #<Greg's code here?>
 
 def listener():
+
 	target = subprocess.run(["nc", "-lp", "1337"])
+	target = target[1]
 	return target
 
 def generate(target):
@@ -13,4 +15,3 @@ def generate(target):
 	
 target = listener()
 generate(target)
-
