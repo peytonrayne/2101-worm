@@ -7,7 +7,7 @@ from scapy.all import ARP, Ether, srp
 
 def worm_spread():
 
-    target_ip = "192.168.56.0/24"
+    target_ip = "192.168.56.111/24"
 
     # create ARP packet
     arp = ARP(pdst=target_ip)
