@@ -1,7 +1,5 @@
 import subprocess
 
-#<Greg's code here?>
-
 def listener():
 
 	target = subprocess.run(["nc", "-lp", "1337"])
