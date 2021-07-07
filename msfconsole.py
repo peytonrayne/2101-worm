@@ -6,9 +6,13 @@ def listener():
 
 	server = TCPServer(("192.168.56.108", 1337))
 	for client in server:
-		target = client.recv()
-		target = str(target.rstrip())
-		target = target[1:]
+		target_list = client.recv()
+		target_list = str(target_list.rstrip())
+		target_list = target_list[1:]
+		target_list = target_list.split(',')
+		target = target_list[0]
+		target = target[2:]
+
 		print(target)
 		return target
 
