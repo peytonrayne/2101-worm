@@ -1,6 +1,5 @@
 #!python3
 from nclib import TCPServer
-import subprocess
 import pexpect
 import sys
 
