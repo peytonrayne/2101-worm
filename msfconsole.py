@@ -43,7 +43,7 @@ def generate(target):
 	process.expect("success")
 
 	
-#target_list = listener()
-target_list = ['192.168.56.112']
+target_list = listener()
+#target_list = ['192.168.56.112']
 for target in target_list:
 	generate(target)
