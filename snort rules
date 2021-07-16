@@ -1,3 +1,4 @@
+#ALERT on any FTP connection attempt
 alert tcp any any -> 192.168.56.102 21 (msg:"FTP connection attempt!"; sid:1000001; rev:1;)
 alert tcp any any -> 192.168.56.102 20 (msg:"FTP connection attempt!"; sid:1000007; rev:2;)
 #DROP packet when sent to specifc port from specific IP
