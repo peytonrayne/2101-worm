@@ -1,5 +1,25 @@
+from subprocess import call
+from re import findall
 
-def get_unwawnted(potential_targets)
+def get_targets():
+#arp scan the network to collect a list of potential targets
+
+    potential_targets=[]
+
+    #run the arp scan
+    call("arp -a > stored_arp.txt", shell=True)
+    arp_list = open("stored_arp.txt", "r")
+    arp_list = arp_list.read()
+
+    #regex pattern to identify ips
+    pattern = r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}'   
+    
+    #put ips into list of potential targets
+    potential_targets = findall(pattern, arp_list)
+    print(potential_targets)
+    return potential_targets
+
+def get_unwawnted(potential_targets):
 #given a list of potential targets, collect user input on which to remove from targets
 
 	x = 1
@@ -11,7 +31,7 @@ def get_unwawnted(potential_targets)
 
 	unwanted = input("Please select unwanted ips, separated by commas: ")
 	#ask users to select which ips are unwanted and make it a list
-	unwanted = unwanted.split(",")print(unwanted)
+	unwanted = unwanted.split(",")
 
 	unwanted_ips = []
 	#add unwanted ips to a list
@@ -24,3 +44,6 @@ def get_unwawnted(potential_targets)
 
 	print(potential_targets)
 	return potential_targets
+
+potential_targets = (get_targets())
+get_unwawnted(potential_targets)
