@@ -52,7 +52,7 @@ def get_ip():
 	pattern = r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}' 
 	ip = findall(pattern, ifconfig)
 	return ip[0]
-
+'''
 def wyrm_setup(unwanted, ip):
 	with open("wyrm.py_source", "r") as wyrm:
 		wyrm_source = wyrm.read()
@@ -61,7 +61,7 @@ def wyrm_setup(unwanted, ip):
 
 		with open("wyrm.py", "x") as wyrm:
 			wyrm.write(wyrm_source)
-
+'''
 def main():
 	ip = get_ip()
 	potential_targets = (get_targets())
